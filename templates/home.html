@@ -28,9 +28,10 @@
 
         <!-- LEFT SIDE -->
         <div class="col-md-7" style="height: 450px; overflow-y: auto;">
+            {% for task in tasks %}
             <div class="card m-1">
                 <div class="card-body">
-                    This is some Task
+                    {{ task.task}}
                     <span class="float-end">
                         <button class="btn btn-success">
                             <i class="fa fa-check"></i> Mark as Done
@@ -44,6 +45,7 @@
                     </span>
                 </div>
             </div>
+            {% endfor %}
         </div>
 
         <!-- RIGHT SIDE -->
@@ -65,10 +67,11 @@
     <!-- FORM -->
     <div class="row mt-4">
         <div class="col-md-6 p-0">
-            <form>
+            <form action="{% url 'addTask' %}" method="POST">
+                {% csrf_token %}
                 <div class="form-group d-flex">
-                    <input type="text" class="form-control" placeholder="Add a task">
-                    <button class="btn btn-primary ms-2" style="width:200px;">
+                    <input type="text" name="task" class="form-control" placeholder="Add a task">
+                    <button type="submit" class="btn btn-primary ms-2" style="width:200px;">
                         <i class="fa fa-plus"></i> Add
                     </button>
                 </div>
